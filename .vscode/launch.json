@@ -5,13 +5,20 @@
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "${fileDirname}/build/${fileBasenameNoExtension}", //remove /build if you are using g++ task
             "args": [],
             "environment": [{ "name": "config", "value": "Debug" }],
             "cwd": "${fileDirname}",
             "linux": {
                 "MIMode": "gdb",
                 "miDebuggerPath": "/usr/bin/gdb"
+            },
+            "osx": {
+                //add configuration for OSX
+            },
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
             },
             "preLaunchTask": "C/C++: CMake build active file", //change this line to switch compile task
         }
