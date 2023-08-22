@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "environment": [{ "name": "config", "value": "Debug" }],
+            "cwd": "${fileDirname}",
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
+            "preLaunchTask": "C/C++: CMake build active file", //change this line to switch compile task
+        }
+    ]
+}
