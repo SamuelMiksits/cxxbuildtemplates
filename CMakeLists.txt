@@ -7,6 +7,11 @@ set(CMAKE_CXX_STANDARD 17)
 # g++ ... -std=c++17
 # Pick an older standard unless you have a specific reason,
 # are you really using concepts and [[assume]]?
+#set(CMAKE_C_STANDARD 17) #uncomment if you are using C in the project as well
+
+# Set project name, the value gets stored in the variable
+# CMAKE_PROJECT_NAME
+project(cxxbuildtemplates)
 
 # Include directories
 include_directories(/path/to/external/includes)
@@ -25,6 +30,15 @@ target_link_libraries(main /path/to/external/library.a)
 # breakpoints in vscode and use debugging
 target_compile_options(main PRIVATE -g)
 target_compile_options(ABC PRIVATE -g)
+
+### Subdirectories
+
+#add_subdirectory(A)
+#add_subdirectory(B)
+#add_subdirectory(C)
+# The above subdirectories would need to implement their own CMakeLists.txt,
+# which do not need cmake_minimum_required, set(CMAKE_CXX_STANDARD) and 
+# project() since those properties are specified by this CMakeLists.txt
 
 ### CxxTest
 

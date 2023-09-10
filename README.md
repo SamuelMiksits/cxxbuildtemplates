@@ -170,7 +170,7 @@ This is not a full CMake tutorial, but contains commonly used blocks of CMake an
 
 ## Start
 
-You should at least state the ```cmake_minimum_required``` and set ```CMAKE_CXX_STANDARD``` variable in all of your CMakeLists.txt files:
+You should at least state the ```cmake_minimum_required```, set ```CMAKE_CXX_STANDARD``` variable and have a ```project``` statement in all of your CMakeLists.txt files:
 
 ```cmake
 
@@ -185,6 +185,15 @@ set(CMAKE_CXX_STANDARD 17)
 # Pick an older standard unless you have a specific reason,
 # are you really using concepts and [[assume]]?
 
+# Set project name, the value gets stored in the variable
+# CMAKE_PROJECT_NAME
+project(cxxbuildtemplates)
+```
+
+Note that if you are using C++ and C, or just C, you should also include a line with 
+
+```cmake 
+set(CMAKE_C_STANDARD)
 ```
 
 ## Executables
@@ -254,6 +263,38 @@ If you want to enable the ```-g``` option for the above example that has the lib
 target_compile_options(main PRIVATE -g)
 target_compile_options(ABC PRIVATE -g)
 ```
+
+## Subdirectories
+
+If you have a root directory, which builds several subdirectories, place a ```CMakeLists.txt``` file in the root directory. Then place a ```CMakeLists.txt``` file in each of the subdirectories. The root ```CMakeLists.txt``` should have the:
+- ```cmake_minimum_required```
+- set ```CMAKE_CXX_STANDARD``` and or ```CMAKE_C_STANDARD```
+- ```project()```
+
+Then use the ```add_subdirectory``` command to pass over the responsibility of building the subfolders to the subfolder's ```CMakeLists.txt``` directives. 
+
+Example: If you have a root folder, with the subfolders ```A```, ```B```, ```C```. Each of the subfolders have a file called ```main.cpp```, the following configuration could be used:
+
+Root folder ```CMakeLists.txt```:
+
+```cmake
+cmake_minimum_required(VERSION 3.11) 
+set(CMAKE_CXX_STANDARD 17)
+project(cxxbuildtemplates)
+
+add_subdirectory(A)
+add_subdirectory(B)
+add_subdirectory(C)
+```
+
+And then subfolder A's ```CMakeLists.txt``` only needs to add the executable file, since the ```CMakeLists.txt``` will follow properties specified in the root folder:
+
+```cmake
+add_executable(main_A)
+```
+Same would be done for the other subfolders. Do note the "mangling" of the name, as having all files be named "main" is disallowed, or multiple targets sharing name in general, even if they do not share the same output folder.
+
+The resulting output files would then be ```/build_directory/A/main_A```, ```/build_directory/B/main_B``` and ```/build_directory/C/main_C```. Though if you want this to be different, ```add_subdirectory``` allows you to pass an optional ```binary_dir``` path to the command.
 
 ## CxxTest
 
