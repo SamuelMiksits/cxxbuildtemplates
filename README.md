@@ -290,7 +290,7 @@ add_subdirectory(C)
 And then subfolder A's ```CMakeLists.txt``` only needs to add the executable file, since the ```CMakeLists.txt``` will follow properties specified in the root folder:
 
 ```cmake
-add_executable(main_A)
+add_executable(main_A main.cpp)
 ```
 Same would be done for the other subfolders. Do note the "mangling" of the name, as having all files be named "main" is disallowed, or multiple targets sharing name in general, even if they do not share the same output folder.
 
