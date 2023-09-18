@@ -59,6 +59,17 @@ In ```args``` you can specify other files and compiler flags, example below if y
 ],
 ```
 
+Another important part of the ```tasks.json``` file is the following section:
+
+```json
+"group": {
+    "kind": "build",
+    "isDefault": true
+},
+```
+
+If you add these properties, it means that you flag your task as a build task, and enable it by default. In practice, this means that you can use to ```Terminal->Run Build Task...```, which can also be activated with ```Ctrl+Shift+B```, to instantly run only the build task assigned with the ```"isDefault": true``` property, without a launch, which we will get to later.
+
 ## CMake
 The approach above is fine, but if you get into larger projects it is advisable to create a CMake/Makefile build script, as the command above peforms single-threaded compilation of all files, regardless if anything has changed since last compile. CMake/Makefile can fix both of thes problems.
 
