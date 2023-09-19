@@ -166,13 +166,13 @@ to whatever you named your build task.
 Do note that you need to accomodate your build task's launch path. The g++ approach will create a file called ```main``` in the base directory if you compiled a file called ```main.cpp```, but with CMake it will place the file in a build subdirectory. Change the ```program``` variable from:
 
 ```json
-"program": "${fileDirname}/${fileBasenameNoExtension}
+"program": "${fileDirname}/${fileBasenameNoExtension}"
 ```
 
 to
 
 ```json
-"program": "${fileDirname}/build/${fileBasenameNoExtension}
+"program": "${fileDirname}/build/${fileBasenameNoExtension}"
 ```
 
 # ```CMakeLists.txt```
